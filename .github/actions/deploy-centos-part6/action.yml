@@ -1,0 +1,18 @@
+name: Deploy on CentOS
+runs:
+  using: composite
+  steps:
+    - name: Build project
+      shell: bash
+      run: |
+        for i in {1..5}; do STATUS=0; mvn $MAVEN_OPTIONS -f $CI_DEPLOY_MODULE/platform/$EXT2/pom.xml && break || STATUS=$? && sleep 60; done; (exit $STATUS)
+        if [[ -e $CI_DEPLOY_MODULE/platform/redist/pom.xml ]]; then
+          for i in {1..5}; do STATUS=0; mvn $MAVEN_OPTIONS -f $CI_DEPLOY_MODULE/platform/redist/pom.xml && break || STATUS=$? && sleep 60; done; (exit $STATUS)
+        fi
+        df -h
+
+    - name: Clean up
+      shell: bash
+      run: |
+        cd /root
+        rm -Rf $(find .m2/repository/ -name '*SNAPSHOT*')
