@@ -6,18 +6,11 @@ runs:
       shell: bash
       run: |
 
-        if [[ -n ${CI_DEPLOY_NEED_GRADLE:-} ]]; then
-          echo Executing Gradle $GRADLE_TASK ${{ matrix.options }} $CI_DEPLOY_OPTIONS on $MAKEJ processors
-          export GRADLE_OPTIONS="-Dorg.gradle.jvmargs=-Xmx2048m -PjavacppPlatform=$CI_DEPLOY_PLATFORM -PjavacppPlatformExtension=${{ matrix.ext }} ${{ matrix.options }} $CI_DEPLOY_OPTIONS --info"
-          gradle clean build $GRADLE_OPTIONS -b $CI_DEPLOY_MODULE/build.gradle
-          echo Publishing only now to help avoid race conditions with Gradle
-          gradle $GRADLE_TASK $GRADLE_OPTIONS -b $CI_DEPLOY_MODULE/build.gradle --refresh-dependencies
-        else
-          mkdir -p $HOME/.m2
-          echo "<settings>" > $HOME/.m2/settings.xml
-          echo "<mirrors><mirror><id>google-maven-central</id><name>GCS Maven Central mirror</name><url>https://maven-central.storage-download.googleapis.com/maven2/</url><mirrorOf>central</mirrorOf></mirror></mirrors>" >> $HOME/.m2/settings.xml
-          echo "<servers><server><id>sonatype-nexus-snapshots</id><username>$CI_DEPLOY_USERNAME</username><password>$CI_DEPLOY_PASSWORD</password></server><server><id>sonatype-nexus-staging</id><username>$CI_DEPLOY_USERNAME</username><password>$CI_DEPLOY_PASSWORD</password></server></servers>" >> $HOME/.m2/settings.xml
-          echo "</settings>" >> $HOME/.m2/settings.xml
+        mkdir -p $HOME/.m2
+        echo "<settings>" > $HOME/.m2/settings.xml
+        echo "<mirrors><mirror><id>google-maven-central</id><name>GCS Maven Central mirror</name><url>https://maven-central.storage-download.googleapis.com/maven2/</url><mirrorOf>central</mirrorOf></mirror></mirrors>" >> $HOME/.m2/settings.xml
+        echo "<servers><server><id>sonatype-nexus-snapshots</id><username>$CI_DEPLOY_USERNAME</username><password>$CI_DEPLOY_PASSWORD</password></server><server><id>sonatype-nexus-staging</id><username>$CI_DEPLOY_USERNAME</username><password>$CI_DEPLOY_PASSWORD</password></server></servers>" >> $HOME/.m2/settings.xml
+        echo "</settings>" >> $HOME/.m2/settings.xml
 
     - name: Clean up
       shell: bash
