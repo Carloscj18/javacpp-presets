@@ -5,8 +5,7 @@ runs:
     - name: Build project
       shell: bash
       run: |
-        DIR = $pwd
-        echo $DIR
+        pwd
         SECONDS=$(( RANDOM % 300 ))
         echo Sleeping $SECONDS seconds to help avoid race conditions with Maven
         sleep $SECONDS
