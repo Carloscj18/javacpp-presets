@@ -21,8 +21,3 @@ runs:
         echo "MAVEN_PHASE=$MAVEN_PHASE" >> $GITHUB_ENV
         echo "MAVEN_OPTIONS=$MAVEN_OPTIONS" >> $GITHUB_ENV
 
-    - name: Clean up
-      shell: bash
-      run: |
-        cd /root
-        rm -Rf $(find .m2/repository/ -name '*SNAPSHOT*')

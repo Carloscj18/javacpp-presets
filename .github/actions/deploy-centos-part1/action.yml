@@ -143,10 +143,5 @@ runs:
           rm -f /usr/lib/libgfortran.so.4* /usr/lib64/libgfortran.so.4* # remove library from GCC 7+
         fi
 
-    - name: Clean up
-      shell: bash
-      run: |
-        cd /root
-        rm -Rf $(find .m2/repository/ -name '*SNAPSHOT*')
 
         

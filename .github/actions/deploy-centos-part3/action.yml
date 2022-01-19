@@ -26,8 +26,3 @@ runs:
         echo "Fixing HOME to /root (was '$HOME')"
         export HOME=/root
 
-    - name: Clean up
-      shell: bash
-      run: |
-        cd /root
-        rm -Rf $(find .m2/repository/ -name '*SNAPSHOT*')
