@@ -28,6 +28,7 @@ jobs:
       - uses: carloscj18/javacpp-presets/.github/actions/deploy-centos-part3@actions
       - uses: carloscj18/javacpp-presets/.github/actions/deploy-centos-part4@actions
       - uses: carloscj18/javacpp-presets/.github/actions/deploy-centos-part5@actions
+      - uses: carloscj18/javacpp-presets/.github/actions/deploy-centos-part6@actions
   redeploy:
     needs: [linux-x86_64]
     runs-on: ubuntu-18.04
