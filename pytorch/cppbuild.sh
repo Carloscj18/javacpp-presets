@@ -29,10 +29,10 @@ if [[ ! -d pytorch ]]; then
     git clone https://github.com/pytorch/pytorch
 fi
 cd pytorch
-git reset --hard
-git checkout v$PYTORCH_VERSION
-git submodule update --init --recursive
-git submodule foreach --recursive 'git reset --hard'
+git reset --hard --verbose
+git checkout v$PYTORCH_VERSION --verbose
+git submodule update --init --recursive --verbose
+git submodule foreach --recursive 'git reset --hard' --verbose
 
 # https://github.com/pytorch/pytorch/pull/66219
 patch -Np1 < ../../../pytorch.patch
@@ -85,7 +85,7 @@ mkdir -p "$PYTHON_INSTALL_PATH"
 
 export CFLAGS="-I$CPYTHON_PATH/include/ -I$PYTHON_LIB_PATH/include/python/ -L$CPYTHON_PATH/lib/ -L$CPYTHON_PATH/libs/"
 export PYTHONNOUSERSITE=1
-$PYTHON_BIN_PATH -m pip install --target=$PYTHON_LIB_PATH setuptools==59.1.0 pyyaml==6.0 typing_extensions==4.0.0
+sudo $PYTHON_BIN_PATH -m pip install --target=$PYTHON_LIB_PATH setuptools==59.1.0 pyyaml==6.0 typing_extensions==4.0.0
 
 case $PLATFORM in
     linux-x86)
