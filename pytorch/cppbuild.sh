@@ -19,7 +19,7 @@ if [[ "$EXTENSION" == *gpu ]]; then
     export TORCH_CUDA_ARCH_LIST="3.5+PTX"
 fi
 
-PYTORCH_VERSION=1.10.1
+PYTORCH_VERSION=1.8.0
 
 mkdir -p "$PLATFORM$EXTENSION"
 cd "$PLATFORM$EXTENSION"
@@ -39,7 +39,7 @@ git submodule foreach --recursive 'git reset --hard'
 ls
 
 # https://github.com/pytorch/pytorch/pull/66219
-patch -Np1 < ../../../pytorch.patch
+#patch -Np1 < ../../../pytorch.patch
 
 CPYTHON_PATH="$INSTALL_PATH/../../../cpython/cppbuild/$PLATFORM/"
 OPENBLAS_PATH="$INSTALL_PATH/../../../openblas/cppbuild/$PLATFORM/"
