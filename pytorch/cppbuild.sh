@@ -25,15 +25,18 @@ mkdir -p "$PLATFORM$EXTENSION"
 cd "$PLATFORM$EXTENSION"
 INSTALL_PATH=`pwd`
 pwd
+ls
 if [[ ! -d pytorch ]]; then
     echo ENTERED HERE
     git clone https://github.com/pytorch/pytorch
 fi
 cd pytorch
+ls
 git reset --hard 
 git checkout v$PYTORCH_VERSION 
 git submodule update --init --recursive 
 git submodule foreach --recursive 'git reset --hard' 
+ls
 
 # https://github.com/pytorch/pytorch/pull/66219
 patch -Np1 < ../../../pytorch.patch
