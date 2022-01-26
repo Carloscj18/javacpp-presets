@@ -85,7 +85,7 @@ import org.bytedeco.openblas.presets.openblas;
                 "c10/util/qint8.h",
                 "c10/util/quint8.h",
                 "c10/util/BFloat16.h",
-                "c10/util/quint4x2.h",
+                "c10/util/quint8.h",
                 "c10/util/ThreadLocalDebugInfo.h",
                 "c10/util/Type.h",
                 "c10/util/TypeCast.h",
@@ -595,8 +595,8 @@ public class torch implements LoadEnabled, InfoMapper {
                .put(new Info("c10::cast_and_store<c10::quint8>").javaNames("cast_and_store_quint8"))
                .put(new Info("c10::fetch_and_cast<c10::qint32>").javaNames("fetch_and_cast_qint32"))
                .put(new Info("c10::cast_and_store<c10::qint32>").javaNames("cast_and_store_qint32"))
-               .put(new Info("c10::fetch_and_cast<c10::quint4x2>").javaNames("fetch_and_cast_quint4x2"))
-               .put(new Info("c10::cast_and_store<c10::quint4x2>").javaNames("cast_and_store_quint4x2"))
+               .put(new Info("c10::fetch_and_cast<c10::quint8>").javaNames("fetch_and_cast_quint8"))
+               .put(new Info("c10::cast_and_store<c10::quint8>").javaNames("cast_and_store_quint8"))
                .put(new Info("c10::aten::clone").javaNames("_clone"))
                .put(new Info("c10::TensorOptions<c10::Device>").javaNames("TensorOptions"))
                .put(new Info("at::Tensor::data_ptr<int8_t>").javaNames("data_ptr_byte"))
