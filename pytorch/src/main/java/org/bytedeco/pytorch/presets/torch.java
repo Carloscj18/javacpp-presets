@@ -516,11 +516,6 @@ public class torch implements LoadEnabled, InfoMapper {
                .put(new Info("std::tuple<at::Tensor&,at::Tensor&>", "std::tuple<at::Tensor&,at::Tensor&,at::Tensor&>").cast().pointerTypes("PointerPointer<Tensor>"))
                .put(new Info("torch::OrderedDict<std::string,at::Tensor>", "torch::OrderedDict<std::string,torch::Tensor>").pointerTypes("StringTensorDict").define())
                .put(new Info("torch::OrderedDict<std::string,at::Tensor>::Iterator").pointerTypes("StringTensorDict.Iterator"))
-               .put(new Info("torch::OrderedDict<std::string,torch::nn::Module>").pointerTypes("StringModuleDict").define())
-               .put(new Info("torch::OrderedDict<std::string,torch::nn::AnyModule>")
-                       .valueTypes("@Cast({\"\", \"torch::OrderedDict<std::string,torch::nn::AnyModule>&&\"}) @StdMove StringAnyModuleDict").pointerTypes("StringAnyModuleDict").define())
-               .put(new Info("torch::OrderedDict<std::string,std::shared_ptr<torch::nn::Module> >").pointerTypes("StringSharedModuleDict").define())
-               .put(new Info("torch::OrderedDict<std::string,std::shared_ptr<torch::nn::Module> >::Iterator").pointerTypes("StringSharedModuleDict.Iterator"))
                .put(new Info("std::pair<std::string,torch::Tensor>", "torch::OrderedDict<std::string,torch::Tensor>::Item",
                              "std::vector<torch::OrderedDict<std::string,torch::Tensor>::Item>::iterator").cast().pointerTypes("StringTensorPair").define())
                .put(new Info("std::vector<torch::nn::Module>").pointerTypes("ModuleVector").define())
@@ -564,7 +559,7 @@ public class torch implements LoadEnabled, InfoMapper {
 
                .put(new Info("c10::Error", "c10::IndexError", "c10::ValueError", "c10::TypeError", "c10::EnforceFiniteError",
                              "c10::OnnxfiBackendSystemError", "c10::Capsule", "c10::OperatorNameView", "c10::StrongTypePtr",
-                             "torch::autograd::CppFunctionPreHook", "torch::autograd::DifferentiableViewMeta").purify())
+                             "torch::autograd::CppFunctionPreHook").purify())
 
                .put(new Info("c10::intrusive_ptr", "c10::guts::is_fundamental", "c10::operator !=", "c10::operator ==", "c10::operator <<",
                              "c10::domain_prefix", "c10::C10FlagsRegistry", "c10::enforce_detail::EnforceFailMessage",
@@ -772,7 +767,6 @@ public class torch implements LoadEnabled, InfoMapper {
                .put(new Info("std::shared_ptr<torch::nn::AnyModule>").annotations("@SharedPtr")
                        .valueTypes("@Cast({\"\", \"std::shared_ptr<torch::nn::AnyModule>\"}) AnyModule").pointerTypes("AnyModule"));
 
-        mapModule(infoMap, "ModuleDict", true);
         mapModule(infoMap, "ModuleList", true);
         mapModule(infoMap, "Sequential", true);
         mapModule(infoMap, "ParameterDict", true);
